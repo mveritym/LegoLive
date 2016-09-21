@@ -19,6 +19,9 @@ describe('Fetch pull requests', () => {
               edges {
                 node {
                   title
+                  author {
+                    login
+                  }
                 }
               }
             }

@@ -23,6 +23,9 @@ export default function pullRequestsQuery(cursor, state) {
             edges {
               node {
                 title
+                author {
+                  login
+                }
               }
             }
           }
