@@ -1,8 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {shallow} from 'enzyme';
 import App from './App';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+describe('App container', () => {
+
+  const props = {
+    charts: [{
+      type: 'Bar',
+      data: {
+        labels: ['a', 'b', 'c'],
+        datasets: [{
+          data: [1, 2, 3],
+        }]
+      }
+    }]
+  };
+
+  it('renders a bar chart', () => {
+    const app = shallow(<App {...props} />);
+    const chart = app.find('BarChart');
+    expect(chart.length).toBe(1);
+    expect(chart.props().data).toBe(props.charts[0].data);
+  });
 });

@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
+import charts from 'react-chartjs';
 import logo from './logo.svg';
 import './App.css';
 
+const chartTypes = {
+  'Bar': charts.Bar
+}
+
 class App extends Component {
+
+  chartComponents = this.props.charts && this.props.charts.map((chart, index) => {
+    const Chart = chartTypes[chart.type];
+    return <Chart key={index} data={chart.data} />
+  });
+
   render() {
     return (
       <div className="App">
@@ -11,7 +22,7 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          {this.chartComponents}
         </p>
       </div>
     );
