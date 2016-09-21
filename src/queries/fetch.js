@@ -9,7 +9,6 @@ export default async function fetchQuery(query) {
   });
 
   if (response.status >= 400) {
-    console.log('HERE');
     throw new Error('Bad response from server');
   }
 
