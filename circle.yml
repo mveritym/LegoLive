@@ -1,3 +1,7 @@
+machine:
+  node:
+    version: 6.3.0
+
 dependencies:
   override:
     - mv config/secrets.ci.js config/secrets.js
