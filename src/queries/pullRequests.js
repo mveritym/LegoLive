@@ -1,4 +1,4 @@
-import { REPO_ID } from '../constants/tokens';
+import { REPO_ID } from '../../config/secrets';
 
 export const openPullRequests = (cursor) => pullRequestsQuery(cursor, 'OPEN');
 

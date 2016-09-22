@@ -1,0 +1,3 @@
+dependencies:
+  override:
+    - mv config/secrets.ci.js config/secrets.js

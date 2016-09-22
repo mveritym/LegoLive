@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { GITHUB_TOKEN } from '../constants/tokens';
+import { GITHUB_TOKEN } from '../../config/secrets';
 
 async function fetchQuery(query) {
   const response = await fetch('https://api.github.com/graphql', {

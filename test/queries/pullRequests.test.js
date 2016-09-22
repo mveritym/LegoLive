@@ -1,5 +1,5 @@
 import { openPullRequests } from '../../src/queries/pullRequests';
-import { REPO_ID } from '../../src/constants/tokens';
+import { REPO_ID } from '../../config/secrets';
 
 const stripStr = str => str.replace(/\s+/g, " "); // flattens whitespace in a string
 
