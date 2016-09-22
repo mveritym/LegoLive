@@ -1,6 +1,8 @@
 import { REPO_ID } from '../constants/tokens';
 
-export default function pullRequestsQuery(cursor, state) {
+export const openPullRequests = (cursor) => pullRequestsQuery(cursor, 'OPEN');
+
+function pullRequestsQuery(cursor, state) {
   const pullRequestParams = [
     {test: cursor, param: `after: "${cursor}"`},
     {test: true, param: `first: 29`},
