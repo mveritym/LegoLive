@@ -7,23 +7,19 @@ async function fetchQuery(query) {
     headers: {'Authorization': `bearer ${GITHUB_TOKEN}`},
     body: JSON.stringify({query})
   });
-
   if (response.status >= 400) {
     throw new Error('Bad response from server');
   }
-
   return await response.json();
 }
 
 export async function fetchAll(connectionType, getQuery) {
-
   const connectionObj = await fetchQuery(getQuery(undefined));
   let cursor = connectionObj.data.node[connectionType].pageInfo.endCursor;
 
   async function recursiveFetch() {
     const newConnectionObj = await fetchQuery(getQuery(cursor));
     const {pageInfo, edges} = newConnectionObj.data.node[connectionType];
-
     const newEdges = connectionObj.data.node[connectionType].edges.concat(edges);
     connectionObj.data.node[connectionType].edges = newEdges;
 
@@ -37,3 +33,5 @@ export async function fetchAll(connectionType, getQuery) {
 
   return await recursiveFetch();
 }
+
+export default fetchQuery;
