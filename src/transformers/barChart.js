@@ -8,11 +8,11 @@ const barChartFromData = (labels, barData) => ({
   }
 });
 
-export default function pullRequestsPerAuthor(pullRequest) {
+export default function pullRequestsPerAuthor(pullRequestList) {
   const authors = [];
   const numPRs = [];
-  
-  pullRequest.data.node.pullRequests.edges.forEach(edge => {
+
+  pullRequestList.data.node.pullRequests.edges.forEach(edge => {
     const author = edge.node.author.login;
     if (authors.includes(author)) {
       numPRs[authors.indexOf(author)] +=1;
