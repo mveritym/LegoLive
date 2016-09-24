@@ -7,10 +7,7 @@ import { fetchAll } from './queries/fetch';
 import { openPullRequests } from './queries/pullRequests';
 import pullRequestsPerAuthor from './transformers/barChart';
 
-
-
 async function render() {
-
   const PRs = await fetchAll('pullRequests', openPullRequests);
 
   const props = {
