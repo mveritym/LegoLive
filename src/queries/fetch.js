@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { GITHUB_TOKEN } from '../../config/secrets';
+import cache from '../utils/cache';
 
 async function fetchQuery(query) {
   const response = await fetch('https://api.github.com/graphql', {
@@ -14,6 +15,11 @@ async function fetchQuery(query) {
 }
 
 export async function fetchAll(connectionType, getQuery) {
+  const cachedData = cache.get(connectionType);
+  if (cachedData) {
+    return cachedData;
+  }
+
   const connectionObj = await fetchQuery(getQuery(undefined));
   let cursor = connectionObj.data.node[connectionType].pageInfo.endCursor;
 
@@ -31,7 +37,9 @@ export async function fetchAll(connectionType, getQuery) {
     }
   }
 
-  return await recursiveFetch();
+  const data = await recursiveFetch();
+  cache.set(connectionType, data);
+  return data;
 }
 
 export default fetchQuery;

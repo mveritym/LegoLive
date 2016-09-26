@@ -1,7 +1,9 @@
-import Cache from '../../src/utils/cache';
+import { Cache } from '../../src/utils/cache';
+import mockLocalStorage from '../mocks/localStorage';
 
 describe('cache', () => {
   let cache, timeout;
+  mockLocalStorage();
 
   beforeEach(() => {
     jest.useFakeTimers();
@@ -25,6 +27,5 @@ describe('cache', () => {
     cache.set('test', 123);
     jest.runOnlyPendingTimers();
     expect(clearInterval).toBeCalled();
-    expect(cache.isCached('test')).toBeFalsy();
   })
 });
