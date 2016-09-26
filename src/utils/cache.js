@@ -1,21 +1,24 @@
-export default function Cache(timeout) {
+export function Cache(timeout) {
   this.timeout = timeout;
 
-  const cache = {};
-
   this.clearKey = (key) => () => {
-    clearInterval(cache[key].intervalID);
-    delete cache[key];
+    clearInterval(localStorage.getItem(key).intervalID);
+    localStorage.removeItem(key);
   };
 
   this.set = (key, item) => {
     const intervalID = setInterval(this.clearKey(key), this.timeout);
-    cache[key] = {
+    localStorage.setItem(key, JSON.stringify({
       item,
       intervalID
-    };
+    }));
   };
 
-  this.get = (key) => cache[key].item;
-  this.isCached = (key) => Object.keys(cache).indexOf(key) !== -1;
+  this.get = (key) => {
+    const parsedData = JSON.parse(localStorage.getItem(key));
+    return parsedData ? parsedData.item : null;
+  }
 }
+
+const cache = new Cache(3600000);
+export default cache;
