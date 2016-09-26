@@ -1,21 +1,21 @@
-const cache = {};
+export default function Cache(timeout) {
+  this.timeout = timeout;
 
-const clearCacheFn = (key) => () => {
-  clearInterval(cache[key].intervalID);
-  delete cache.key;
-}
+  const cache = {};
 
-const cacheItem = (key, item) => {
-  const intervalID = setInterval(clearCacheFn(key), 3600000);
-  cache[key] = {
-    item,
-    intervalID
+  this.clearKey = (key) => () => {
+    clearInterval(cache[key].intervalID);
+    delete cache[key];
   };
-};
 
-const isCached = (key) => Object.keys(cache).contains(key);
+  this.set = (key, item) => {
+    const intervalID = setInterval(this.clearKey(key), this.timeout);
+    cache[key] = {
+      item,
+      intervalID
+    };
+  };
 
-export {
-  cacheItem,
-  isCached
+  this.get = (key) => cache[key].item;
+  this.isCached = (key) => Object.keys(cache).indexOf(key) !== -1;
 }
