@@ -1,41 +1,25 @@
 import pullRequestsPerAuthor from '../../src/transformers/barChart';
 
 describe('Bar chart transformer', () => {
-  it('should turn a PR into a bar chart data obj', () => {
-    const PR = {
-      data: {
-        node: {
-          description: 'Grocery UI',
-          name: 'grocery',
-          pullRequests: {
-            edges: [{
-              node: {
-                author: {
-                  login: 'mveritym'
-                },
-                title: 'First pull request'
-              }
-            }, {
-              node: {
-                author: {
-                  login: 'asavin'
-                },
-                title: 'Translation change'
-              }
-            }, {
-              node: {
-                author: {
-                  login: 'mveritym'
-                },
-                title: 'Another pull request'
-              }
-            }]
-          }
-        }
-      }
-    };
+  it('should turn a list of PRs into a bar chart data obj', () => {
+    const PRs = [{
+      author: {
+        login: 'mveritym'
+      },
+      title: 'First pull request'
+    }, {
+      author: {
+        login: 'asavin'
+      },
+      title: 'Translation change'
+    }, {
+      author: {
+        login: 'mveritym'
+      },
+      title: 'Another pull request'
+    }];
 
-    expect(pullRequestsPerAuthor(PR)).toEqual({
+    expect(pullRequestsPerAuthor(PRs)).toEqual({
       type: 'Bar',
       data: {
         labels: ['mveritym', 'asavin'],

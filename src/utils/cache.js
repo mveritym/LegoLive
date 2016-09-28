@@ -34,5 +34,4 @@ export function Cache(timeout) {
   }
 }
 
-const cache = new Cache(5000); // 3600000
-export default cache;
+export default Cache;

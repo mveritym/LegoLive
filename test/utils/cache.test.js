@@ -117,19 +117,4 @@ describe('cache', () => {
       Date.now = oldDateNow;
     })
   });
-
-  // xit('init should set an interval based on the timestamp', () => {
-  //   // cache.clearKey = jest.fn();
-  //   // cache.set('test', 123);
-  //   //
-  //   // const fakeDate = Date.now();
-  //   // Date.now = jest.fn().mockReturnValue(fakeDate);
-  //   // cache = new Cache(timeout);
-  //   // cache.clearKey = jest.fn();
-  //   //
-  //   // expect(cache.get('test')).toBe(123);
-  //   // expect(setInterval.mock.calls.length).toBe(1);
-  //   // expect(setInterval.mock.calls[0]).toEqual([cache.clearKey('test'), ]);
-  // });
-
 });

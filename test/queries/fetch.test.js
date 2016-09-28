@@ -1,7 +1,10 @@
 import nock from 'nock';
 import fetchQuery from '../../src/queries/fetch';
+import cache from '../../src/utils/cache';
 
 describe('Fetch queries function', () => {
+
+  cache.setItem = jest.fn();
 
   it('returns a JSON representation of the data', async () => {
     const response = {data: 'some fake data'};
