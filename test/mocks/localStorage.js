@@ -1,19 +1,26 @@
 export default function mockLocalStorage() {
   const localStorageMock = (function() {
-    var store = {};
+    let store = {};
+    let length = 0;
     return {
-      getItem: function(key) {
+      getItem: jest.fn(key => {
         return store[key];
-      },
-      setItem: function(key, value) {
+      }),
+      setItem: jest.fn((key, value) => {
         store[key] = value.toString();
-      },
-      removeItem: function(key) {
+        length = Object.keys(store).length;
+      }),
+      removeItem: jest.fn(key => {
         delete store[key];
-      },
-      clear: function() {
+        length = Object.keys(store).length;
+      }),
+      clear: jest.fn(() => {
         store = {};
-      }
+        length = 0;
+      }),
+      key: jest.fn(n => {
+        return Object.keys(store)[n];
+      })
     };
   })();
 
