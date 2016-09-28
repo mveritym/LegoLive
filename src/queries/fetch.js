@@ -17,6 +17,7 @@ async function fetchQuery(query) {
 export async function fetchAll(connectionType, getQuery) {
   const cachedData = cache.get(connectionType);
   if (cachedData) {
+    console.log('Getting from cache');
     return cachedData;
   }
 
@@ -37,6 +38,7 @@ export async function fetchAll(connectionType, getQuery) {
     }
   }
 
+  console.log('Caching!');
   const data = await recursiveFetch();
   cache.set(connectionType, data);
   return data;
